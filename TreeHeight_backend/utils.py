@@ -1,0 +1,102 @@
+import argparse
+import numpy as np
+import cv2
+
+
+def str2bool(v):
+    if v.lower() in ['true', 1]:
+        return True
+    elif v.lower() in ['false', 0]:
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+
+def count_params(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def read_image(path):
+    """Read image and output RGB image (0-1).
+    Args:
+        path (str): path to file
+    Returns:
+        array: RGB image (0-1)
+    """
+    img = cv2.imread(path)
+
+    if img.ndim == 2:
+        img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) / 255.0
+
+    return img
+
+def write_depth(path, depth, bits=1):
+    """Write depth map to a png file.
+    Args:
+        path (str): filepath without extension
+        depth (array): depth
+    """
+
+    depth_min = depth.min()
+    depth_max = depth.max()
+
+    max_val = (2**(8*bits))-1
+
+    if depth_max - depth_min > np.finfo("float").eps:
+        out = max_val * (depth - depth_min) / (depth_max - depth_min)
+    else:
+        out = np.zeros(depth.shape, dtype=depth.type)
+
+    if bits == 1:
+        cv2.imwrite(path + ".png", out.astype("uint8"))
+    elif bits == 2:
+        cv2.imwrite(path + ".png", out.astype("uint16"))
+
+    return
+
+def align_depth(original,predicted):
+    """
+    Refer issue: https://github.com/isl-org/MiDaS/issues/171
+    """
+    if original.shape !=predicted.shape:
+        raise ValueError(f"Shape of Original Image = {original.shape} does not align with shape of predicted image: {predicted.shape}")
+    x = original.copy().flatten()
+    y = predicted.copy().flatten()
+    A = np.vstack([x, np.ones(len(x))]).T
+
+    s,t = np.linalg.lstsq(A,y, rcond=None)[0]
+
+    aligned_image = (predicted -t)/s
+
+    return aligned_image
+
+def img_to_patch(x, patch_size, flatten_channel=True):
+    """create patches of images"""
+    B,C,H,W = x.shape
+    x = x.reshape(B, C, H//patch_size, patch_size, W//patch_size, patch_size)
+    x = x.permute(0,2,4,1,3,5)
+    x = x.flatten(1,2)
+    if flatten_channel:
+        x = x.flatten(2,4)
+    return x
+
+class AverageMeter(object):
+    """Computes and stores the average and current value"""
+
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.val = 0
+        self.avg = 0
+        self.sum = 0
+        self.count = 0
+
+    def update(self, val, n=1):
+        self.val = val
+        self.sum += val * n
+        self.count += n
+        self.avg = self.sum / self.count
+
+
