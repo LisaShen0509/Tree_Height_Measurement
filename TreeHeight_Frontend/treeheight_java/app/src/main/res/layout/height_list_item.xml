@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/height_list_item"
+    android:orientation="horizontal"
+    android:layout_margin="5dp"
+    android:background="@color/color_white">
+    <TextView
+        android:id="@+id/contour_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="100dp"
+        android:text="tree0"
+        android:textColor="@color/color_black"
+        android:background="@color/color_white"/>
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10m"
+        android:textSize="18sp"
+        android:layout_marginStart="200dp"
+        android:textColor="@color/color_black"
+        android:background="@color/color_white"/>
+</RelativeLayout>

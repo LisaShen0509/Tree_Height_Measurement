@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    边框颜色处理-->
+    <item>
+        <shape>
+            <solid android:color="@color/color_ff33b5e5" />
+            <!--            边框圆角-->
+            <corners
+                android:radius="15px"/>
+        </shape>
+    </item>
+    <!--    背景颜色处理-->
+    <item
+        android:bottom="1px"
+        android:left="1px"
+        android:right="-2px"
+        android:top="1px">
+        <shape>
+            <!--            背景圆角-->
+            <corners
+                android:radius="15px"/>
+            <stroke
+                android:width="1px"
+                android:color="@color/color_ff33b5e5" />
+        </shape>
+    </item>
+</layer-list>
+

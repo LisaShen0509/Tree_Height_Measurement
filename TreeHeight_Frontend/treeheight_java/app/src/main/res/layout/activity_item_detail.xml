@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    tools:context="com.google.ar.core.examples.java.Tree.ItemDetailActivity"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        android:background="@color/base_color"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Back"
+        app:titleTextColor="@color/color_white" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp">
+        <com.google.ar.core.examples.java.common.view.AlphaTabsIndicator
+            android:id="@+id/alphaIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/color_white"
+            android:orientation="horizontal">
+
+            <com.google.ar.core.examples.java.common.view.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabText="RGB"
+                app:tabTextSize="13sp"
+                app:textColorNormal="@color/comui_tab"
+                app:textColorSelected="@color/comui_tab_selected" />
+
+            <com.google.ar.core.examples.java.common.view.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabText="Abs Depth"
+                app:tabTextSize="13sp"
+                app:textColorNormal="@color/comui_tab"
+                app:textColorSelected="@color/comui_tab_selected" />
+
+            <com.google.ar.core.examples.java.common.view.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabText="Ali Depth"
+                app:tabTextSize="13sp"
+                app:textColorNormal="@color/comui_tab"
+                app:textColorSelected="@color/comui_tab_selected" />
+            <com.google.ar.core.examples.java.common.view.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabText="Mask"
+                app:tabTextSize="13sp"
+                app:textColorNormal="@color/comui_tab"
+                app:textColorSelected="@color/comui_tab_selected" />
+            <com.google.ar.core.examples.java.common.view.AlphaTabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:tabText="3D Point Cloud"
+                app:tabTextSize="13sp"
+                app:textColorNormal="@color/comui_tab"
+                app:textColorSelected="@color/comui_tab_selected" />
+        </com.google.ar.core.examples.java.common.view.AlphaTabsIndicator>
+        <TextView
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@color/color_white"
+            android:gravity="center"
+            android:text="Not calculated yet"
+            android:textColor="@color/base_color"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+            <ListView
+                android:id="@+id/height_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true">
+                <requestFocus/>
+            </ListView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/responseText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:gravity="center"
+            android:text="Waiting for connection"
+            android:textAlignment="center"
+            android:textColor="@color/common_red"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/upload_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/base_color"
+            android:text="Calulate"
+            android:textColor="@color/color_white"
+            android:textSize="15dp"
+            android:layout_alignParentBottom="true"
+            android:onClick="connectServer"/>
+    </RelativeLayout>
+
+</LinearLayout>
