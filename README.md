@@ -13,4 +13,4 @@ Run "python TreeMeasure.py" to start the backend
 4. Install the app on your phone
 5. Click the "Obtain data" button at the bottom to retrieve camera parameters.
 ## Running Video
-<video src="Running%20video.mp4" controls title="Title"></video>
+https://youtube.com/shorts/-88XH7r8Pzk?feature=share
