@@ -4,7 +4,7 @@
 ## Start the backend
 Run "python TreeMeasure.py" to start the backend
 
-### Install the app
+## Install the app
 1. Open the project in Android Studio
 2. Change IP address
 ![Alt text](https://github.com/LisaShen0509/Tree_Height_Measurement/blob/main/image.png)
